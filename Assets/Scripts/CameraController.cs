@@ -3,22 +3,16 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform player;
-    public float speed;
-    public float sqrThreshold;
-    public float maxDistance;
+    [SerializeField] float speed;
+    [SerializeField] float sqrThreshold;
+    [SerializeField] float maxDistance;
+    [SerializeField] float z = -10;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
+
+        //Vector3 mousePosition = Input.mousePosition;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);//Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         mousePosition.z = player.position.z;
 
         Vector3 mouseOffset = mousePosition - player.position;
@@ -31,7 +25,7 @@ public class CameraController : MonoBehaviour
             cameraTarget = player.position + offsetDirection * Mathf.Min(offset, maxDistance);
         }
 
-        cameraTarget.z = -10;
+        cameraTarget.z = z;
         transform.position = Vector3.Lerp(transform.position, cameraTarget, speed * Time.deltaTime);
     }
 }

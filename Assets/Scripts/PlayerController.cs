@@ -5,8 +5,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rb;
     [SerializeField] SpriteRenderer _characterBody;
     [SerializeField] Animator _animator;
+    [SerializeField] AudioClip _footstep;
     [SerializeField] float _movementSpeed;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    float _nextFootstepAudio = 0f;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
         PlayerMovement();
     }
 
-    private void PlayerMovement()
+    void PlayerMovement()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical"); ;
@@ -34,7 +35,17 @@ public class PlayerController : MonoBehaviour
         if (isWalking) {
             bool flipSprite = movement.x < 0f;
             _characterBody.flipX = flipSprite;
+            HandleFootsteps();
         }
+    }
 
+    void HandleFootsteps()
+    {
+        if (Time.time >= _nextFootstepAudio)
+        {
+            float frequency = _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / 2f;
+            _nextFootstepAudio = Time.time + frequency;
+            AudioManager.Instance.PlayAudio(_footstep, AudioManager.SoundType.SFX, 1f, false);
+        }
     }
 }
