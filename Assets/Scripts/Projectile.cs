@@ -3,6 +3,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb;
+    [SerializeField] ParticleSystem _hitParticles;
     [SerializeField] float _speed;
     [SerializeField] float _damage;
 
@@ -26,6 +27,8 @@ public class Projectile : MonoBehaviour
 
     void DestroyProjectile()
     {
+        ParticleSystem hitParticles = Instantiate(_hitParticles, transform.position, Quaternion.identity);
+        Destroy(hitParticles.gameObject, 1f);
         Destroy(gameObject);
     }
 }
