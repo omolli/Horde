@@ -16,6 +16,10 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Terrain"))
         {
             DestroyProjectile();
+        } else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            DealDamage(collision.gameObject);
+            DestroyProjectile();
         }
     }
 
@@ -24,7 +28,13 @@ public class Projectile : MonoBehaviour
         Vector2 movement = direction.normalized * _speed;
         _rb.linearVelocity = movement;
     }
-
+    void DealDamage(GameObject target)
+    {
+        if (target.TryGetComponent(out EntityHealth entityHealth))
+        {
+            entityHealth.loseHp(_damage);
+        }
+    }
     void DestroyProjectile()
     {
         ParticleSystem hitParticles = Instantiate(_hitParticles, transform.position, Quaternion.identity);

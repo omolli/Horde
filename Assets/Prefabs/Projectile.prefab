@@ -285,4 +285,4 @@ MonoBehaviour:
   _rb: {fileID: 4421403094779066254}
   _hitParticles: {fileID: 8430300982426128630, guid: a0039faf203bbc6458baea2195455126, type: 3}
   _speed: 4
-  _damage: 10
+  _damage: 5
