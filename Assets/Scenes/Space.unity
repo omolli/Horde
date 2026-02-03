@@ -345927,7 +345927,7 @@ MonoBehaviour:
   _tip: {fileID: 1714224554}
   _projectile: {fileID: 2914912317892109021, guid: 58e8055f042d673479a0eb79c0efb177, type: 3}
   _shootSound: {fileID: 8300000, guid: 40d231cf207d7824c8674c61cc233a4e, type: 3}
-  _hands: {fileID: 915577826}
+  _hands: {fileID: 915577825}
   _fireRate: 3
 --- !u!1 &1457346744
 GameObject:

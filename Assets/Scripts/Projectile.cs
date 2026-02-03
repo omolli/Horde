@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] ParticleSystem _hitParticles;
     [SerializeField] float _speed;
     [SerializeField] float _damage;
+    [SerializeField] AudioClip _hitEnemySound;
 
     public void Initialize(Vector2 direction)
     {
@@ -16,7 +17,8 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Terrain"))
         {
             DestroyProjectile();
-        } else if (collision.gameObject.CompareTag("Enemy"))
+        } 
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
             DealDamage(collision.gameObject);
             DestroyProjectile();
@@ -32,7 +34,8 @@ public class Projectile : MonoBehaviour
     {
         if (target.TryGetComponent(out EntityHealth entityHealth))
         {
-            entityHealth.loseHp(_damage);
+            entityHealth.LoseHp(_damage);
+            AudioManager.Instance.PlayAudio(_hitEnemySound, AudioManager.SoundType.SFX, 1.0f, false);
         }
     }
     void DestroyProjectile()

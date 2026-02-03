@@ -5,7 +5,7 @@ public class PlayerAimController : MonoBehaviour
     [SerializeField] Transform _tip;
     [SerializeField] Projectile _projectile;
     [SerializeField] AudioClip _shootSound;
-    [SerializeField] Transform _hands;
+    [SerializeField] GameObject _hands;
     [SerializeField] float _fireRate;
 
 
@@ -42,7 +42,11 @@ public class PlayerAimController : MonoBehaviour
 
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        _hands.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        _hands.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (_direction.x  < 0 )
+        {
+            _hands.GetComponentInChildren<SpriteRenderer>().flipX = true;
+        }
     }
 
     void SetDirection()

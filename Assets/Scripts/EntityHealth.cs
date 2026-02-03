@@ -19,7 +19,7 @@ public class EntityHealth : MonoBehaviour
         InvokeRepeating(nameof(HandleHpRegen), 1f, 1f);
     }
 
-    public void loseHp(float hpLost)
+    public void LoseHp(float hpLost)
     {
         _currentHp -= hpLost;
         OnHpChange?.Invoke(Mathf.Clamp(_currentHp, 0, _maxHp), _maxHp);

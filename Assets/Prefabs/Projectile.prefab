@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5154083650646132395}
   - component: {fileID: 1708100041362124285}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3343448856600542110}
   - component: {fileID: 6787407640769032969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ProjectileVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 1951805667423188083}
   - component: {fileID: 4421403094779066254}
   - component: {fileID: 2914912317892109021}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -286,3 +286,4 @@ MonoBehaviour:
   _hitParticles: {fileID: 8430300982426128630, guid: a0039faf203bbc6458baea2195455126, type: 3}
   _speed: 4
   _damage: 5
+  _hitEnemySound: {fileID: 8300000, guid: e749b40dea7362e41869fbc52ae51306, type: 3}
