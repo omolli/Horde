@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float _difficultyMultiplier;
     float _currentCooldown;
     [SerializeField] Tilemap _groundTiles;
+    [SerializeField] Tilemap _wallTiles;
     List<Vector3> _spawnPositions = new();
 
     private void Start()
@@ -37,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (Vector3Int position in _groundTiles.cellBounds.allPositionsWithin)
         {
-            if (_groundTiles.HasTile(position))
+            if (_groundTiles.HasTile(position) && !_wallTiles.HasTile(position))
             {
                 _spawnPositions.Add(_groundTiles.GetCellCenterWorld(position));
             }
