@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] Enemy _enemyPrefab;
+    [SerializeField] Enemy[] _enemyPrefabs;
     [SerializeField] float _spawnCooldown;
     [SerializeField] float _difficultyMultiplier;
     float _currentCooldown;
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemyToRndLocation()
     {
-        Instantiate(_enemyPrefab, GetRndLocation(),Quaternion.identity);
+        Instantiate(_enemyPrefabs[Random.Range(0,_enemyPrefabs.Length)], GetRndLocation(),Quaternion.identity);
     }
 
     Vector3 GetRndLocation()

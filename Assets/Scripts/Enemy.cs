@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     {
         _entityHealth = GetComponent<EntityHealth>();
         _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
     }
     void Start()
     {
