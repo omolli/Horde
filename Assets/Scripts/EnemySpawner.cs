@@ -48,6 +48,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemyToRndLocation()
     {
         Instantiate(_enemyPrefabs[Random.Range(0,_enemyPrefabs.Length)], GetRndLocation(),Quaternion.identity);
+        //Instantiate(_enemyPrefabs[_enemyPrefabs.Length-1], GetRndLocation(), Quaternion.identity);
     }
 
     Vector3 GetRndLocation()

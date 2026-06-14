@@ -7,17 +7,24 @@ public class Enemy : MonoBehaviour
     EntityHealth _entityHealth;
     NavMeshAgent _agent;
     GameObject _target;
+    Canvas _canvas;
     
     private void Awake()
     {
         _entityHealth = GetComponent<EntityHealth>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
+        _canvas = GetComponentInChildren<Canvas>();
     }
     void Start()
     {
         _target = GameObject.FindGameObjectWithTag("Player");
         _entityHealth.OnDeath += DestroyEnemy;
+        if (_canvas != null)
+        {
+            _canvas.worldCamera = Camera.main;
+        }
+
     }
 
     // Update is called once per frame
