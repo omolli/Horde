@@ -26,7 +26,6 @@ public class PlayerAimController : MonoBehaviour
             _nextFireTime = Time.time + 1f / _fireRate;
             Shoot();
         }
-
     }
 
     void Shoot()

@@ -5,10 +5,16 @@ public class PlayerStaffController : MonoBehaviour
     [SerializeField] Transform _tip;
     [SerializeField] Projectile _projectile;
     [SerializeField] AudioClip _shootSound;
+    [SerializeField] AudioClip _blastSound;
     [SerializeField] float _fireRate;
+    [SerializeField] ParticleSystem _blastParticles;
+    [SerializeField] float _blastRate;
+    [SerializeField] float _blastRadius;
+    [SerializeField] float _blastDamage;
 
 
     float _nextFireTime;
+    float _nextBlastTime;
     Vector2 _direction;
 
     void Update()
@@ -25,7 +31,11 @@ public class PlayerStaffController : MonoBehaviour
             _nextFireTime = Time.time + 1f / _fireRate;
             Shoot();
         }
-
+        else if (Input.GetButton("Fire2") && Time.time >= _nextBlastTime)
+        {
+            _nextBlastTime = Time.time + _blastRate;
+            StartBlast();
+        }
     }
 
     void Shoot()
@@ -35,6 +45,30 @@ public class PlayerStaffController : MonoBehaviour
         AudioManager.Instance.PlayAudio(_shootSound, AudioManager.SoundType.SFX, 0.5f, false);
 
     }
+
+    void StartBlast()
+    {
+        AudioManager.Instance.PlayAudio(_blastSound, AudioManager.SoundType.SFX, 0.5f, false);
+        Invoke(nameof(Blast), 4f);
+    }
+
+    void Blast()
+    {
+        ParticleSystem blastParticles = Instantiate(_blastParticles, transform.position, Quaternion.identity);
+        Destroy(blastParticles.gameObject, 2f);
+        Collider2D[] hitEntities = Physics2D.OverlapCircleAll(transform.position, _blastRadius);
+
+        foreach(Collider2D hit in hitEntities)
+        {
+            if (hit.CompareTag("Enemy")) {
+                if (hit.TryGetComponent(out EntityHealth entityHealth))
+                {
+                    entityHealth.LoseHp(_blastDamage);
+                }
+            }
+        }
+    }
+
 
     void RotateStaff() 
     {
