@@ -7,10 +7,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] AudioClip _footstep;
     [SerializeField] float _movementSpeed;
+
     float _nextFootstepAudio = 0f;
+    EntityHealth _entityHealth;
+    bool _isDead = false;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _entityHealth = GetComponent<EntityHealth>();
+        _entityHealth.OnDeath += HandleDeath;
     }
 
     // Update is called once per frame
@@ -46,5 +51,17 @@ public class PlayerController : MonoBehaviour
             _nextFootstepAudio = Time.time + frequency;
             AudioManager.Instance.PlayAudio(_footstep, AudioManager.SoundType.SFX, 1f, false);
         }
+    }
+
+    void HandleDeath()
+    {
+        if (_isDead)
+        {
+            return;
+        }
+        _isDead = true;
+        Debug.Log("Player died");
+        //_animator.Play("PlayerDeath");
+        _animator.SetBool("isDead", true);
     }
 }
